@@ -114,7 +114,6 @@
         <script>
             /*
                 Improvements to do:
-                    - can not properly handle negative numbers
                     - activate +/- button
                     - activate () button, do operations with parenthesis ()
                     - and so many other features
@@ -153,8 +152,8 @@
                         // Now do the real operations of each type
                         operation(parsedInputs, numDiv, '/');
                         operation(parsedInputs, numMul, '*');
-                        operation(parsedInputs, numAdd, '+');
                         operation(parsedInputs, numSub, '-');
+                        operation(parsedInputs, numAdd, '+');
 
                         // At last add result after the input string and show in a new line as '= Answer'
                         screenText += '\n= '+parsedInputs[0];
@@ -181,8 +180,12 @@
                         input[i] == '*' ||
                         input[i] == '/'
                     ){
-                        parsedInput.push(+string); // change the string to number and push in the array
-                        parsedInput.push(input[i]); // push the operator in the array
+                        // change the string to number and push in the array
+                        // +string converts null character into 0, and this make my 
+                        // program handle negative numbers properly
+                        parsedInput.push(+string); 
+                        // push the operator in the array
+                        parsedInput.push(input[i]); 
                         string = '';
                     } 
                     else if(i == input.length - 1){ // parse the last number in the input string 
